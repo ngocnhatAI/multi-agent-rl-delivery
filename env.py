@@ -134,6 +134,8 @@ class Environment:
             if self.packages[i].start_time == self.t:
                 selected_packages.append(self.packages[i])
                 self.packages[i].status = 'waiting'
+            if self.packages[i].start_time < self.t and self.packages[i].status != "delivered":
+                selected_packages.append(self.packages[i])
 
         state = {
             'time_step': self.t,
@@ -356,40 +358,3 @@ class Environment:
         for row in grid_copy:
             print('\t'.join(str(cell) for cell in row))
         
-
-if __name__=="__main__":
-    env = Environment('map.txt', 10, 2, 5)
-    state = env.reset()
-    print("Initial State:", state)
-    print("Initial State:")
-    env.render()
-
-    # Agents
-    # Initialize agents
-    from greedyagent import GreedyAgents as Agents
-    agents = Agents()   # You should define a default parameters here
-    agents.init_agents(state) # You have a change to init states which can be used or not. Depend on your choice
-    print("Agents initialized.")
-    
-    # Example actions for robots
-    list_actions = ['S', 'L', 'R', 'U', 'D']
-    n_robots = len(state['robots'])
-    done = False
-    t = 0
-    while not done:
-        actions = agents.get_actions(state) 
-        state, reward, done, infos = env.step(actions)
-    
-        print("\nState after step:")
-        env.render()
-        print(f"Reward: {reward}, Done: {done}, Infos: {infos}")
-        print("Total Reward:", env.total_reward)
-        print("Time step:", env.t)
-        print("Packages:", state['packages'])
-        print("Robots:", state['robots'])
-
-        # For debug purpose
-        t += 1
-        if t == 100:
-            break
-    
