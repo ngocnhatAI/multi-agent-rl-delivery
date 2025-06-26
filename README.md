@@ -1,28 +1,32 @@
-# marl-delivery
-MARL samples code for Package Delivery.
-You has to run and test against BFS agents for the following 5 configs.
-The seeds are given at later time.
+# 🚚 Delivery Optimization with Multi-Agent Reinforcement Learning (MARL)
 
-- Version v1.1: Fix a small logic of `start_time` should less than `dead_line`
+This project simulates a delivery system powered by **Multi-Agent Reinforcement Learning (MARL)**. Each agent represents a delivery unit that learns to coordinate with others to optimize delivery time, distance, and overall efficiency.
 
-# Testing scripts
-```python main.py --seed 10 --max_time_steps 1000 --map map1.txt --num_agents 5 --n_packages 100```
+## ⚙️ How to Run
 
-```python main.py --seed 10 --max_time_steps 1000 --map map2.txt --num_agents 5 --n_packages 100```
+1. Make sure the script is executable:
+```bash
+chmod +x run.sh
+````
 
-```python main.py --seed 10 --max_time_steps 1000 --map map3.txt --num_agents 5 --n_packages 500```
+2. Run the project:
 
-```python main.py --seed 10 --max_time_steps 1000 --map map4.txt --num_agents 10 --n_packages 500```
+```bash
+./run.sh
+```
 
-```python main.py --seed 10 --max_time_steps 1000 --map map5.txt --num_agents 10 --n_packages 1000```
+This script will launch the training or evaluation loop (depending on your configuration inside the code).
 
-# For RL testing
-- You can use `simple_PPO.ipynb` as the starting point.
-- Avoid modify the class `Env`, you can try to modify the `convert_state` function or `reward_shaping`
-- You can choose to use or change the standard `PPO`. Note that: It is not easy to match the greedy agent, using RL.
+---
+
+## 🧠 MARL Overview
+
+* Each agent learns to make decisions such as which package to pick up and which route to take.
+* Agents are trained using **MAPPO** algorithm.
+* The environment is custom-built with frameworks **Gymnasium**.
 
 
-# TODO:
-- [x]: Add BFS agents
-- [x]: Add test scripts
-- [x]: Add RL agents
+## 📦 Requirements
+
+* Python 3.x
+* Dependencies: `torch`, `numpy`, `gym`, `pettingzoo`, etc.
